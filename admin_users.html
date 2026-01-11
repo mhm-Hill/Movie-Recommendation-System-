@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <title>إدارة المستخدمين</title>
+    <link rel="stylesheet" href="/static/navigation.css">
+    <link rel="stylesheet" href="/static/admin.css">
+</head>
+<body>
+    {% include 'navigation.html' %}
+    <div class="admin-container">
+        <div class="admin-header">
+            <h1>إدارة المستخدمين</h1>
+            </div>
+
+        {% if error_message %}
+            <p class="error-message">{{ error_message }}</p>
+        {% endif %}
+
+        <table class="admin-table">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>الاسم</th>
+                    <th>البريد الإلكتروني</th>
+                    <th>مسؤول (Admin)؟</th>
+                    <th>إجراءات</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% if users %}
+                    {% for user in users %}
+                        <tr>
+                            <td>{{ user.User_id }}</td>
+                            <td>{{ user.Name }}</td>
+                            <td>{{ user.Email }}</td>
+                            <td>
+                                {% if user.is_admin %}
+                                    <span style="color: green; font-weight: bold;">نعم</span>
+                                {% else %}
+                                    <span>لا</span>
+                                {% endif %}
+                            </td>
+                            <td class="actions">
+                             {% if user.User_id != user_id_session %}
+                             <form action="/admin/user/toggle_admin?id={{ user.User_id }}" method="POST" class="action-form">
+                              {% if user.is_admin %}
+                              <button type="submit" class="btn btn-warning btn-sm">إزالة صلاحيات المسؤول</button>
+                               {% else %}
+                                 <button type="submit" class="btn btn-success btn-sm">جعله مسؤولاً</button>
+                               {% endif %}
+                                 </form>
+
+                                   <form action="/admin/user/delete?id={{ user.User_id }}" method="POST" class="action-form" onsubmit="return confirm('هل أنت متأكد من حذف هذا المستخدم؟ سيتم حذف جميع بياناته وتقييماته بشكل نهائي.');">
+                                     <button type="submit" class="btn btn-danger btn-sm">حذف المستخدم</button>
+                                     </form>
+                                     {% else %}
+                                      <span style="color: #777;">(حسابك الحالي)</span>
+                                      {% endif %}
+                                         </td>
+                                          </tr>
+                                         {% endfor %}
+                                        {% else %}
+                    <tr>
+                        <td colspan="5">لا يوجد مستخدمون لعرضهم.</td>
+                    </tr>
+                {% endif %}
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>

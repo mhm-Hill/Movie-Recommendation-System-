@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <title>الملف الشخصي</title>
+    <link rel="stylesheet" href="/static/profile.css"> 
+    <link rel="stylesheet" href="/static/navigation.css">
+    <script src="/static/profile.js" defer></script>
+</head>
+<body id="profile-page">
+    {% include 'navigation.html' %}
+
+    <div class="container">
+        <h1>الملف الشخصي</h1>
+
+        {% if error_message %}
+            <p class="error-message">{{ error_message }}</p>
+        {% endif %}
+
+        {% if user_data %}
+            <div class="profile-info">
+                <h2>بيانات المستخدم:</h2>
+                <p><strong>الاسم:</strong> {{ user_data.Name }}</p>
+                <p><strong>البريد الإلكتروني:</strong> {{ user_data.Email }}</p>
+            </div>
+<div class="edit-profile-section">
+    <h2>تعديل الملف الشخصي</h2>
+    
+    {% if success_message == 'updated' %}
+    <p class="feedback-message success">تم تحديث ملفك بنجاح!</p>
+    {% endif %}
+    {% if error_message %}
+    <p class="feedback-message error">حدث خطأ. يرجى المحاولة مرة أخرى.</p>
+    {% endif %}
+    
+    <form action="/update_profile" method="POST" class="edit-form" id="edit-profile-form">
+        <div>
+            <label for="name">الاسم:</label>
+            <input type="text" id="name" name="name" value="{{ user_data.Name }}" required>
+        </div>
+        <div>
+            <label for="new_password">كلمة المرور الجديدة (اتركه فارغاً لعدم التغيير):</label>
+            <input type="password" id="new_password" name="new_password">
+        </div>
+        <div>
+            <label for="confirm_password">تأكيد كلمة المرور الجديدة:</label>
+            <input type="password" id="confirm_password" name="confirm_password">
+            <p id="password-error" class="feedback-message error" style="display: none;"></p>
+        </div>
+        <button type="submit">حفظ التغييرات</button>
+    </form>
+</div>
+            <div class="user-ratings">
+                <h2>أفلام قمت بتقييمها (آخر 5):</h2>
+                {% if user_ratings and user_ratings|length > 0 %}
+                    <ul>
+                        {% for rating in user_ratings %}
+                            <li>فيلم: "{{ rating.movie_name }}" - تقييمك: {{ rating.stars }} نجوم</li>
+                        {% endfor %}
+                    </ul>
+                {% else %}
+                    <p>لم تقم بتقييم أي أفلام بعد.</p>
+                {% endif %}
+            </div>
+        
+            <div class="watchlist-section">
+                <h2>قائمة المشاهدة الخاصة بك</h2>
+                {% if watchlist_movies and watchlist_movies|length > 0 %}
+                    <div class="recommendations">
+                        {% for movie in watchlist_movies %}
+                            <div class="movie">
+                                {% if movie.Poster_URL %}
+                                    <img src="{{ movie.Poster_URL }}" alt="Poster for {{ movie.Name }}" class="movie-poster">
+                                {% endif %}
+                                <a href="/movie?id={{ movie.Movie_id }}" class="movie-title-link">
+                                    <h2>{{ movie.Name }}</h2>
+                                </a>
+                            </div>
+                        {% endfor %}
+                    </div>
+                {% else %}
+                    <p>قائمة المشاهدة فارغة. يمكنك إضافة أفلام من صفحة التصفح أو التوصيات.</p>
+                {% endif %}
+            </div>
+
+        {% elif not error_message %}
+            <p>لا يمكن تحميل بيانات الملف الشخصي حالياً.</p>
+        {% endif %}
+
+        <p class="dashboard-link"><a href="/dashboard">العودة إلى لوحة التحكم</a></p>
+    </div>
+</body>
+</html>

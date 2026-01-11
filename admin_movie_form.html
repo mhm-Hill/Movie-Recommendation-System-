@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ 'تعديل فيلم' if movie.Movie_id else 'إضافة فيلم جديد' }}</title>
+    <link rel="stylesheet" href="/static/navigation.css">
+    <link rel="stylesheet" href="/static/admin.css">
+</head>
+<body>
+    {% include 'navigation.html' %}
+    <div class="admin-container">
+        <h1>{{ 'تعديل فيلم: ' ~ movie.Name if movie.Movie_id else 'إضافة فيلم جديد' }}</h1>
+
+        <form action="{{ '/admin/movie/edit?id=' ~ movie.Movie_id if movie.Movie_id else '/admin/movie/add' }}" method="POST" class="admin-form">
+            <div class="form-group">
+                <label for="name">اسم الفيلم:</label>
+                <input type="text" id="name" name="name" value="{{ movie.Name or '' }}" required>
+            </div>
+            <div class="form-group">
+                <label for="release_year">سنة الإصدار:</label>
+                <input type="number" id="release_year" name="release_year" value="{{ movie.Release_year or '' }}" required>
+            </div>
+            <div class="form-group">
+                <label for="duration">المدة (بالدقائق):</label>
+                <input type="number" id="duration" name="duration" value="{{ movie.Duration or '' }}" required>
+            </div>
+            <div class="form-group">
+                <label for="description">قصة الفيلم (الوصف):</label>
+                <textarea id="description" name="description" rows="6">{{ movie.Description or '' }}</textarea>
+            </div>
+            <div class="form-group">
+                <label for="poster_url">رابط صورة البوستر:</label>
+                <input type="url" id="poster_url" name="poster_url" value="{{ movie.Poster_URL or '' }}" placeholder="https://example.com/poster.jpg">
+            </div>
+            <div class="form-group">
+                <label for="genre_id">النوع (Genre):</label>
+                <select id="genre_id" name="genre_id" required>
+                    <option value="">اختر النوع...</option>
+                    {% for genre in genres %}
+                        <option value="{{ genre.Genre_id }}" {% if movie.Genre_id == genre.Genre_id %}selected{% endif %}>{{ genre.Title }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="platform_id">المنصة (Platform):</label>
+                <select id="platform_id" name="platform_id" required>
+                    <option value="">اختر المنصة...</option>
+                    {% for platform in platforms %}
+                        <option value="{{ platform.Platform_id }}" {% if movie.Platform_id == platform.Platform_id %}selected{% endif %}>{{ platform.Platformname }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div class="form-actions">
+                <button type="submit" class="btn btn-primary">{{ 'تحديث الفيلم' if movie.Movie_id else 'حفظ الفيلم' }}</button>
+                <a href="/admin/movies" class="btn btn-secondary">إلغاء</a>
+            </div>
+        </form>
+    </div>
+</body>
+</html>

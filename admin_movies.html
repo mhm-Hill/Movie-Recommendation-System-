@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <title>إدارة الأفلام</title>
+    <link rel="stylesheet" href="/static/navigation.css">
+    <link rel="stylesheet" href="/static/admin.css"> </head>
+<body>
+    {% include 'navigation.html' %}
+    <div class="admin-container">
+        <div class="admin-header">
+            <h1>إدارة الأفلام</h1>
+            <a href="/admin/movie/add" class="btn btn-primary">إضافة فيلم جديد</a> </div>
+
+        {% if error_message %}
+            <p class="error-message">{{ error_message }}</p>
+        {% endif %}
+
+        <table class="admin-table">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>اسم الفيلم</th>
+                    <th>سنة الإصدار</th>
+                    <th>النوع (Genre)</th>
+                    <th>إجراءات</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% if movies and movies|length > 0 %}
+                    {% for movie in movies %}
+                        <tr>
+                            <td>{{ movie.Movie_id }}</td>
+                            <td>{{ movie.Name }}</td>
+                            <td>{{ movie.Release_year }}</td>
+                            <td>{{ movie.Genre if movie.Genre else 'N/A' }}</td>
+                            <td class="actions">
+                                 <a href="/admin/movie/edit?id={{ movie.Movie_id }}" class="btn btn-secondary">تعديل</a>
+                               <form action="/admin/movie/delete?id={{ movie.Movie_id }}" method="POST" class="delete-form" onsubmit="return confirm('هل أنت متأكد أنك تريد حذف هذا الفيلم؟ هذه العملية لا يمكن التراجع عنها.');">
+                              <button type="submit" class="btn btn-danger">حذف</button>
+                              </form>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                {% else %}
+                    <tr>
+                        <td colspan="5">لا توجد أفلام لعرضها.</td>
+                    </tr>
+                {% endif %}
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>

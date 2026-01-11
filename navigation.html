@@ -1,0 +1,16 @@
+<nav class="main-nav">
+    <ul>
+        <li><a href="/dashboard" class="nav-link nav-dashboard-link">لوحة التحكم</a></li>
+        <li><a href="/profile" class="nav-link nav-profile-link">الملف الشخصي</a></li>
+        <li><a href="/browse" class="nav-link nav-browse-link">تصفح الأفلام</a></li>
+        <li><a href="/recommend" class="nav-link nav-recommend-link">بدء التوصية</a></li>
+
+    {% if is_admin_session %}
+        <li><a href="/admin" class="nav-link">لوحة تحكم المسؤول</a></li>
+        {% endif %}
+        </ul>
+    
+    <ul class="nav-logout">
+        <li><a href="/logout" class="nav-link nav-logout-link">تسجيل الخروج</a></li>
+    </ul>
+</nav>

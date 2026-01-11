@@ -1,0 +1,28 @@
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="UTF-8">
+  <title>Create a New Account</title>
+  <link rel="stylesheet" href="/static/register.css">
+  <script src="/static/register.js" defer></script>
+</head>
+<body>
+  <div class="container">
+    <h1>Create Account</h1>
+    <form action="/register" method="POST" onsubmit="return validateRegisterForm();">
+      <label for="name">Full Name:</label>
+      <input type="text" id="name" name="name" required>
+
+      <label for="email">Email Address:</label>
+      <input type="email" id="email" name="email" required>
+
+      <label for="password">Password:</label>
+      <input type="password" id="password" name="password" required>
+
+      <button type="submit">Register</button>
+    </form>
+    <p>Already have an account? <a href="/login">Log in</a></p>
+
+    <div class="error" id="error-msg" style="display: none;">This email is already in use.</div>
+  </div>
+</body>
+</html>

@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <title>نتائج التوصيات</title>
+    <link rel="stylesheet" href="/static/navigation.css">
+    <link rel="stylesheet" href="/static/final.css">
+    <script src="/static/watchlist.js" defer></script>
+    <script src="/static/final.js" defer></script>
+</head>
+<body id="recommend-page">
+    {% include 'navigation.html' %}
+
+    <div class="container">
+        <h1>نتائج التوصيات</h1>
+
+        <div class="recommendations">
+            {% if recommendations and recommendations|length > 0 %}
+                {% for movie in recommendations %}
+                    <div class="movie">
+                        <a href="/movie?id={{ movie.Movie_id }}" class="movie-link">
+                            {% if movie.Poster_URL %}
+                                <img src="{{ movie.Poster_URL }}" alt="Poster for {{ movie.Name }}" class="movie-poster">
+                            {% endif %}
+                            <h2>{{ movie.Name }}</h2>
+                        </a>
+
+                        <div class="movie-details">
+                            <p><strong>النوع:</strong> {{ movie.Genre }}</p>
+                            <p><strong>المنصة:</strong> {{ movie.Platform }}</p>
+                            <p><strong>سنة الإصدار:</strong> {{ movie.Release_year }}</p>
+                            <p><strong>المدة:</strong> {{ movie.Duration }} دقيقة</p>
+                        </div>
+
+                        <div class="movie-actions">
+                            <button class="watchlist-btn" data-movie-id="{{ movie.Movie_id }}">أضف للمشاهدة</button>
+                            <form action="/rate_movie" method="post" class="rating-form">
+                                <input type="hidden" name="movie_id" value="{{ movie.Movie_id }}">
+                                <label for="rating_{{ movie.Movie_id }}">قيّم هذا الفيلم:</label>
+                                <select name="rating" id="rating_{{ movie.Movie_id }}">
+                                    <option value="">اختر التقييم</option>
+                                    <option value="1">1 نجمة ⭐</option>
+                                    <option value="2">2 نجمتان ⭐⭐</option>
+                                    <option value="3">3 نجوم ⭐⭐⭐</option>
+                                    <option value="4">4 نجوم ⭐⭐⭐⭐</option>
+                                    <option value="5">5 نجوم ⭐⭐⭐⭐⭐</option>
+                                </select>
+                                <button type="submit">إرسال التقييم</button>
+                                <p class="rating-feedback"></p>
+                            </form>
+                        </div>
+                        
+                        </div>
+                {% endfor %}
+            {% else %}
+                <p>لا توجد توصيات متاحة حالياً. <a href="/recommend" style="color: #d38df2;">جرّب البحث عن فيلم آخر</a>.</p>
+            {% endif %}
+        </div>
+
+        <div class="back-link-container">
+            <a href="/recommend" class="back-button">العودة لصفحة التوصيات</a>
+        </div>
+    </div>
+</body>
+</html>

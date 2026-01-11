@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="UTF-8">
+  <title>Select Recommendation Type</title>
+  <link rel="stylesheet" href="/static/recommend.css">
+  <link rel="stylesheet" href="/static/navigation.css">
+</head>
+<body  id="recommend-page">
+  {% include 'navigation.html' %} 
+  <div class="container">
+  
+    <h1>Select Recommendation Type</h1>
+    
+    <form action="/recommend" method="POST" class="recommend-form">
+      <label for="movie_name"> Name:</label>
+      <input type="text" id="movie_name" name="movie_name" required>
+
+      <label for="algo_type">Algorithm Type:</label>
+      <select id="algo_type" name="algo_type" required>
+        <option value="content">Content-Based</option>
+        <option value="collaborative">Collaborative Filtering</option>
+        <option value="hybrid">Hybrid</option>
+      </select>
+      <button type="submit">Get Recommendations</button>
+    </form>
+  </div>
+</body>
+</html>
