@@ -1,0 +1,77 @@
+
+.main-nav {
+    display: flex;
+    justify-content: space-between; 
+    align-items: center;
+    background-color: #1e1e1e; 
+    padding: 0 40px; 
+    border-bottom: 2px solid #800080; 
+
+    
+    position: sticky;
+    top: 0;
+    z-index: 1000; 
+}
+
+.main-nav ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+}
+
+.main-nav .nav-link {
+    display: block;
+    padding: 20px 15px; 
+    color: #ccc;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 16px;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.main-nav .nav-link:hover {
+    background-color: #800080; 
+    color: #fff;
+}
+
+.nav-logout .nav-logout-link {
+    background-color: #500050; 
+    border-radius: 5px;
+    margin: 10px 0;
+    padding: 10px 15px;
+}
+
+.nav-logout .nav-logout-link:hover {
+    background-color: #a64ca6;
+}
+
+
+body#dashboard-page .nav-dashboard-link,
+body#profile-page .nav-profile-link,
+body#browse-page .nav-browse-link,
+body#recommend-page .nav-recommend-link {
+    background-color: #800080;
+    color: #fff;
+}
+.watchlist-btn {
+    width: 100%;
+    padding: 8px;
+    margin-top: 10px;
+    background-color: #3e3e3e;
+    color: #fff;
+    border: 1px solid #a64bf4;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+}
+
+.watchlist-btn:hover {
+    background-color: #a64bf4;
+}
+
+.watchlist-btn.active {
+    background-color: #28a745; 
+    border-color: #28a745;
+}

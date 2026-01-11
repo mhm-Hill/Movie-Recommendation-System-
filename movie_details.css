@@ -1,0 +1,109 @@
+
+body {
+    background-color: #121212;
+    color: #fff;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    direction: rtl;
+    padding: 20px;
+}
+
+.container {
+    max-width: 900px;
+    margin: auto;
+    background-color: #1e1e1e;
+    padding: 30px 40px;
+    border-radius: 12px;
+    border: 1px solid #800080;
+}
+
+.movie-main-info h1 {
+    color: #d38df2;
+    font-size: 32px;
+    margin-bottom: 10px;
+}
+
+.movie-main-info .meta-data {
+    color: #ccc;
+    font-size: 15px;
+    margin-bottom: 25px;
+}
+
+.meta-data span {
+    margin-left: 15px;
+}
+
+.rating-section {
+    background-color: #282828;
+    padding: 20px;
+    border-radius: 8px;
+    margin-top: 20px;
+}
+
+
+.rating-form label { display: block; margin-bottom: 10px; font-weight: bold; }
+.rating-form select { width: 50%; padding: 8px; background-color: #333; color: #fff; border: 1px solid #800080; border-radius: 5px; margin-bottom: 10px; }
+.rating-form button { padding: 10px 20px; background-color: #800080; border: none; color: white; border-radius: 5px; cursor: pointer; transition: background-color 0.3s; }
+.rating-form button:hover { background-color: #a64ca6; }
+.rating-feedback { margin-top: 10px; font-weight: bold; min-height: 16px; }
+.rating-feedback.success { color: #28a745; }
+.rating-feedback.error { color: #e74c3c; }
+
+
+.similar-movies-section {
+    margin-top: 40px;
+    border-top: 1px solid #555;
+    padding-top: 20px;
+}
+
+.similar-movies-section h2 {
+    color: #a264d6;
+    margin-bottom: 20px;
+}
+
+
+.recommendations { display: flex; flex-wrap: wrap; justify-content: center; gap: 15px; }
+.movie { background-color: #282828; border: 1px solid #500050; border-radius: 10px; padding: 15px; width: 200px; text-align: center; }
+.movie h2 { margin: 0 0 8px; color: #a264d6; font-size: 18px; }
+.movie p { margin: 5px 0; font-size: 14px; color: #ccc; }
+.movie a { text-decoration: none; color: inherit; }
+
+
+.back-link-container { text-align: center; margin-top: 40px; }
+.back-button { display: inline-block; padding: 12px 25px; background-color: #3e3e3e; color: #ffffff; text-decoration: none; border: 1px solid #800080; border-radius: 6px; font-size: 16px; transition: background-color 0.3s; }
+.back-button:hover { background-color: #a64bf4; }
+.movie-description {
+    font-size: 16px;       
+    line-height: 1.8;      
+    color: #ddd;           
+    margin-top: 25px;      
+    margin-bottom: 30px;
+    text-align: justify;   
+}
+
+.movie-main-info {
+    display: flex; 
+    gap: 30px; 
+    align-items: flex-start; 
+}
+
+.movie-details-poster {
+    width: 300px; 
+    height: auto;
+    border-radius: 10px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+}
+
+.movie-text-details {
+    flex: 1; 
+}
+.actions-container {
+    margin: 25px 0;
+}
+
+.movie-poster-small {
+    width: 100%;
+    height: 250px;
+    object-fit: cover;
+    border-radius: 8px;
+    margin-bottom: 10px;
+}
